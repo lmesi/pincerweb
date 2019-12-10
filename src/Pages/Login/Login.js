@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
-//import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import firebase from '../../firebase'
 
 const Login = (props) => {
     const [emailText, setEmailText] = useState('');
     const [passwordText, setPasswordText] = useState('');
 
-    const handleLogin = ()=> {
+    const handleLogin = (ev)=> {
         firebase
             .auth()
             .signInWithEmailAndPassword(emailText, passwordText)
             .then(user => {
                 console.log(user.user.displayName)
+                props.setUser(user.user)
+                props.history.push('/orders')
             })
             .catch(function(error) {
                 console.log(error.message)
@@ -36,4 +38,4 @@ const Login = (props) => {
     )
 }
 
-export default Login
+export default withRouter(Login)

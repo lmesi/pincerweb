@@ -3,35 +3,35 @@ import React, { useState, useEffect } from 'react'
 import Order from '../../components/Order/Order'
 import firebase from '../../firebase'
 
-function HandleOrders() {
+function HandleOrders(name) {
     const [orders, setOrders] = useState([])
 
     useEffect(() => {
         firebase
             .firestore()
-            .collection('Orders')
-            .onSnapshot((snapshot) => {
+            .collection('order')
+            .where('restaurant', "==", name).onSnapshot((snapshot) => {
                 const newOrders = snapshot.docs.map((doc) => ({
                     id: doc.id,
                     ...doc.data()
                 }))
                 setOrders(newOrders)
             })
-    }, [])
+    }, [name])
 
 
     return orders
 }
 
 const Orders = (props) => {
-    const orders = HandleOrders()
+    const orders = HandleOrders(props.user?props.user.displayName:'Me')
     
     return (
         <div>
-            <h1>Orders</h1>
+            <h1>Orders to {props.user?props.user.displayName:'Me'} </h1>
             {orders.map((order) => 
                 <li key={order.id}>
-                    <Order amount={order.amount} name="kaja" />
+                    <Order order={order} />
                 </li>
             )}
         </div>

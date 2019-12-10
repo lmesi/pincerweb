@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-//import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import firebase from '../../firebase'
 
 const Registraion = (props) => {
@@ -13,7 +13,10 @@ const Registraion = (props) => {
         .auth()
         .createUserWithEmailAndPassword(emailText, passwordText)
         .then(user => {
-            user.user.updateProfile({displayName: usernameText})
+            user.user.updateProfile({displayName: usernameText}).then(()=> {
+                props.setUser(user.user)
+                props.history.push('/orders')
+            })
             console.log(user)})
         .catch(function(error) {
             // Handle Errors here.
@@ -43,4 +46,4 @@ const Registraion = (props) => {
     )
 }
 
-export default Registraion
+export default withRouter(Registraion)
