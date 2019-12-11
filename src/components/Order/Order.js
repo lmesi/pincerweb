@@ -42,7 +42,7 @@ const Order = ({order}) => {
       <CardContent className={classes.cardOuter}>
         <h2>Table: {order.table}</h2>
         {order.dishes.map(element =>
-          <SimpleCard name={element.name} amount={element.amount}/>
+          <SimpleCard name={element.name} amount={element.amount} key={element.name}/>
         )}
       </CardContent>
     </Card>

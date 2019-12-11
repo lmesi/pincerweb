@@ -30,9 +30,7 @@ const Orders = (props) => {
         <div>
             <h1>Orders to {props.user?props.user.displayName:'Me'} </h1>
             {orders.map((order) => 
-                <li key={order.id}>
-                    <Order order={order} />
-                </li>
+                    <Order key={order.id} order={order} />
             )}
         </div>
     )
