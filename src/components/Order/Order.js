@@ -30,19 +30,25 @@ const SimpleCard = (props) => {
       </CardContent>
       <CardActions>
         <Button className={classes.button} size="small">Done</Button>
+        <Button className={classes.button} size="small" onClick={props.deleteOrder(props.id)}>Delete</Button>
       </CardActions>
     </Card>
   );
 }
 
-const Order = ({order}) => {
+const Order = (props) => {
   const classes = useStyles();
   return (
     <Card>
       <CardContent className={classes.cardOuter}>
-        <h2>Table: {order.table}</h2>
-        {order.dishes.map(element =>
-          <SimpleCard name={element.name} amount={element.amount} key={element.name}/>
+        <h2>Table: {props.order.table}</h2>
+        {props.order.dishes.map(element =>
+          <SimpleCard 
+            name={element.name} 
+            amount={element.amount} 
+            key={element.name} 
+            id={props.order.id}
+            deleteOrder={props.deleteOrder} />
         )}
       </CardContent>
     </Card>

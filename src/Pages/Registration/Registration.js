@@ -136,28 +136,6 @@ const Registraion = (props) => {
           </div>
         </Container>
     )
-
-    /*return (
-        <div>
-            <h1>Registration</h1>
-            <input 
-                type="text"
-                placeholder="Username" 
-                onChange={e => setUsernameText(e.target.value)} />
-            <input 
-                type="email"
-                placeholder="Email"
-                onChange={e => setEmailText(e.target.value)} />
-            <input
-                type="password"
-                placeholder="Password"
-                onChange={e => setPasswordText(e.target.value)} />
-            <input 
-                type="password"
-                placeholder="Password again" />
-            <button onClick={handleRegistration}>Registraion</button>
-        </div>
-    )*/
 }
 
 export default withRouter(Registraion)
