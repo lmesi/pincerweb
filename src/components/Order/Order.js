@@ -1,5 +1,6 @@
 import React from 'react'
 
+import './order.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -7,7 +8,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
-  card: {},
+  card: {
+    
+  },
   cardOuter: {
     minWidth: 275,
     backgroundColor: 'gray',
@@ -16,7 +19,18 @@ const useStyles = makeStyles({
     gridGap: '10px',
     padding: '10px'
   },
-  button: {}
+  buttonDone: {
+    backgroundColor: 'white',
+    '&:hover': {
+      background: "#32CD32",
+   },
+  },
+  buttonDelete: {
+    backgroundColor: 'white',
+    '&:hover': {
+      background: "#FF4500",
+   },
+  }
 });
 
 const SimpleCard = (props) => {
@@ -28,10 +42,6 @@ const SimpleCard = (props) => {
         <h3>{props.name}</h3>
         <h2>Amount: {props.amount}</h2>
       </CardContent>
-      <CardActions>
-        <Button className={classes.button} size="small">Done</Button>
-        <Button className={classes.button} size="small" onClick={props.deleteOrder(props.id)}>Delete</Button>
-      </CardActions>
     </Card>
   );
 }
@@ -46,10 +56,12 @@ const Order = (props) => {
           <SimpleCard 
             name={element.name} 
             amount={element.amount} 
-            key={element.name} 
-            id={props.order.id}
-            deleteOrder={props.deleteOrder} />
+            key={element.name}  />
         )}
+        <CardActions>
+              <Button className={classes.buttonDone} size="small" onClick={() =>{props.setOrderDone(props.order.id)}}>Done</Button>
+              <Button className={classes.buttonDelete} size="small" onClick={() =>{props.deleteOrder(props.order.id)}}>Delete</Button>
+        </CardActions>
       </CardContent>
     </Card>
  )

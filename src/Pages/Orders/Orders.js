@@ -43,8 +43,8 @@ const Orders = (props) => {
     const orders = HandleOrders(props.user?props.user.displayName:'Me')
 
     const deleteOrder = (id) => {
-        console.log('Befut! DE MIÉRT?????????????')
-          /*firebase
+        //console.log(id)
+          firebase
           .firestore()
           .collection('order')
           .doc(id)
@@ -54,14 +54,35 @@ const Orders = (props) => {
           })
           .catch((error) =>{
               console.error("Error removing document: ", error)
-          })*/
+          })
+    }
+
+    const setOrderDone = (id) => {
+        firebase
+            .firestore()
+            .collection('order')
+            .doc(id)
+            .update({
+                done: true
+            })
+            .then(() => {
+                console.log("Document successfully updated!");
+            })
+            .catch(function(error) {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
     }
     
     return (
         <div>
             <h1>Orders to {props.user?props.user.displayName:'Me'} </h1>
             {orders.map((order) => 
-                    <Order key={order.id} order={order} deleteOrder={deleteOrder}/>
+                    <Order 
+                        key={order.id}
+                        order={order}
+                        deleteOrder={deleteOrder}
+                        setOrderDone={setOrderDone} />
             )}
         </div>
     )
