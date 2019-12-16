@@ -40,7 +40,7 @@ const SimpleCard = (props) => {
     <Card className={classes.card}>
       <CardContent>
         <h3>{props.name}</h3>
-        <h2>Amount: {props.amount}</h2>
+        <h2>Quantity: {props.quantity}</h2>
       </CardContent>
     </Card>
   );
@@ -55,7 +55,7 @@ const Order = (props) => {
         {props.order.dishes.map(element =>
           <SimpleCard 
             name={element.name} 
-            amount={element.amount} 
+            quantity={element.quantity} 
             key={element.name}  />
         )}
         <CardActions>

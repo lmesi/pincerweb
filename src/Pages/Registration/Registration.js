@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.secondary.main,
     },
     form: {
-      width: '100%', // Fix IE 11 issue.
+      width: '100%',
       marginTop: theme.spacing(3),
     },
     submit: {
@@ -128,8 +128,7 @@ const Registraion = (props) => {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={handleRegistration}
-              >
+                onClick={handleRegistration} >
                 Sign Up
               </Button>
             </form>

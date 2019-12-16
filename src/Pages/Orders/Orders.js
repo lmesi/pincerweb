@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-//import { Link } from 'react-router-dom'
 import Order from '../../components/Order/Order'
 import firebase from '../../firebase'
 
@@ -10,6 +9,7 @@ function HandleOrders(name) {
         firebase
             .firestore()
             .collection('order')
+            .orderBy('time', "desc")
             .where('restaurant', "==", name)
             .onSnapshot((snapshot) => {
                 const newOrders = snapshot.docs.map((doc) => ({
